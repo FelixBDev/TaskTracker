@@ -1,5 +1,5 @@
 import sys
-class task:
+class Task:
     def __init__(self, name, status):
         self.name = name
         self.status = status
@@ -7,7 +7,8 @@ class task:
     def __str__(self):
         return f"Task : {self.name}, status : {self.status})"
 
-allTask = [task]
+allTask = [Task]
+numOfTask = 0
 
 #Information sur comment marche l'application
 print('What do you want to do?')
@@ -24,11 +25,12 @@ while True:
     try:
         userAction = input('> ')
         if userAction == 'new task':
-
             print('Please write the name of the task.')
-            task1 = task(input('> '), 'to do')
             
-            allTask.append(task1)
+            taskName = input('> ')
+            globals()[f"task{numOfTask}"] = Task(taskName, 'To do')
+            allTask.append(Task(taskName, 'To do'))
+            numOfTask = numOfTask + 1
 
 
         elif userAction == 'remove task':
@@ -45,7 +47,8 @@ while True:
             print('Your current task are ' + str(allTask))
 
         elif userAction == 'to do list':
-            print(task1)
+            for i in allTask:
+                print(i)
         
 
         elif userAction == 'exit':
